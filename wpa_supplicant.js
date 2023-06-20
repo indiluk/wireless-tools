@@ -92,8 +92,8 @@ function enable(options, callback) {
   var file = options.interface + '-wpa_supplicant.conf';
 
   var command = 'wpa_passphrase "' + options.ssid + '" "' + options.passphrase
-    + '" > ' + file + ' && wpa_supplicant -i ' + options.interface + ' -B -D '
-    + options.driver + ' -c ' + file + ' && rm -f ' + file;
+      + '" > ' + file + ' && sed -i \'s/}/scan_ssid=1\\n}/ \' ' + file + ' && wpa_supplicant -i ' + options.interface + ' -B -D '
+      + options.driver + ' -c ' + file + ' && rm -f ' + file;
 
   return this.exec(command, callback);
 }
